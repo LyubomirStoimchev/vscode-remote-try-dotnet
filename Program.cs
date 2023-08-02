@@ -1,34 +1,40 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using System;
 
-app.Urls.Add("http://localhost:5000");
-
-app.MapGet("/", () => "Hello World!");
-
-app.MapGet("/{cityName}/weather", GetWeatherByCity);
-
-app.Run();
-
-
-Weather GetWeatherByCity(string cityName)
+namespace vscode_remote_try_dotnet
 {
-    app.Logger.LogInformation($"Weather requested for {cityName}.");
-    var weather = new Weather(cityName);
-    return weather;
-}
-
-public record Weather
-{
-    public string City { get; set; }
-
-    public Weather(string city)
+    class Program
     {
-        City = city;
-        Conditions = "Cloudy";
-        // Temperature here is in celsius degrees, hence the 0-40 range.
-        Temperature = new Random().Next(0,40).ToString();
+        static void Main(string[] args)
+        {
+           Console.WriteLine("Enter input: num1, symbol, num2 on each line!");
+           int input1 = Convert.ToInt32(Console.ReadLine());
+           string x = Console.ReadLine();
+           int input2 = Convert.ToInt32(Console.ReadLine());
+           
+           if (x == "+")
+           {
+               Console.WriteLine(input1 + input2);
+           }
+           else if(x == "-")
+           {
+               Console.WriteLine(input1 - input2);
+           }
+           else if(x == "*")
+           {
+               Console.WriteLine(input1 * input2);
+           }
+           else if(x == "/")
+           {
+              Console.WriteLine(input1 / input2); 
+           }
+           else if(x == "%")
+           {
+               Console.WriteLine(input1 % input2);
+           }
+           else
+           {
+               Console.WriteLine("Unknown input! \nUse only \"+, -, *, /, %\"");
+           }
+        }
     }
-
-    public string Conditions { get; set; }
-    public string Temperature { get; set; }
 }
